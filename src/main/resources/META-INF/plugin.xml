@@ -6,14 +6,51 @@
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.chierying.ideapluginhelloworld.services.MyApplicationService"/>
+        <applicationService
+                serviceImplementation="com.github.chierying.ideapluginhelloworld.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.chierying.ideapluginhelloworld.services.MyProjectService"/>
+        <toolWindow id="Api Builder" secondary="true" icon="AllIcons.General.Modified" anchor="right"
+                    factoryClass="com.github.chierying.apibuilder.ui.ApiBuilderToolWindow"/>
     </extensions>
 
     <projectListeners>
         <listener class="com.github.chierying.ideapluginhelloworld.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </projectListeners>
+
+
+    <actions>
+        <group id="com.zb.helloworld" text="hello-world" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <action id="HelloWorld" class="com.github.chierying.ideapluginhelloworld.action.HelloWorldAction"
+                    text="HelloWorld"
+                    description="HelloWorld">
+            </action>
+            <action id="HelloWorldDialog"
+                    class="com.github.chierying.ideapluginhelloworld.action.HelloWorldDialogAction"
+                    text="HelloWorldDialog"
+                    description="HelloWorldDialog">
+            </action>
+            <action id="popup" class="com.github.chierying.ideapluginhelloworld.action.PopupAction"
+                    text="popup"
+                    description="popup">
+            </action>
+            <action id="nofity" class="com.github.chierying.ideapluginhelloworld.action.NotifyAction"
+                    text="nofity"
+                    description="nofity">
+            </action>
+            <action id="psi" class="com.github.chierying.ideapluginhelloworld.action.PsiNavigationDemoAction"
+                    text="psi"
+                    description="psi">
+            </action>
+            <action id="psiAddMethod" class="com.github.chierying.ideapluginhelloworld.action.PsiAddMethodAction"
+                    text="添加方法"
+                    description="向类中添加方法">
+            </action>
+
+        </group>
+    </actions>
 </idea-plugin>
